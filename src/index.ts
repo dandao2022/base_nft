@@ -22,4 +22,4 @@ const start = async (num: number, privateKey: string) => {
     }
     console.log("完成")
 }
-start(4, "0x") //第一个是数量，第二个是私钥
+start(10, "0x") //第一个是数量，第二个是私钥

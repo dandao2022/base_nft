@@ -134,25 +134,12 @@ export const bridge = (amount: number, privateKey: string) => {
         let encodeData = web3.eth.abi.encodeParameters(["address", "uint256", "uint64", "bool", "bytes"], [account.address, web3.utils.toBN(amount), 100000, false, "0x"])
         encodeData = "0xe9e05c42" + encodeData.replace("0x", "")
         let gasPrice = await web3.eth.getGasPrice()
-        let gas
-        try {
-            gas = await web3.eth.estimateGas({
-                from: account.address,
-                to: "0xe93c8cd0d409341205a592f8c4ac1a5fe5585cfa",
-                value: amount,
-                data: encodeData
-            })
-        } catch (error) {
-            console.log(`跨链失败，失败原因${error.message}`)
-            resolve(false)
-            return
-        }
         let signTx = await web3.eth.accounts.signTransaction({
             from: account.address,
             data: encodeData,
             value:web3.utils.toBN(amount),
             to: "0xe93c8cd0d409341205a592f8c4ac1a5fe5585cfa",
-            gas: gas,
+            gas: 100000,
             gasPrice: Math.round(Number(gasPrice) * 1.2)
 
         }, privateKey)
@@ -163,8 +150,7 @@ export const bridge = (amount: number, privateKey: string) => {
             )
             const getBalance = async () => {
                 let balance = await web3.eth.getBalance(account.address)
-                console.log(`当前账户余额 ${Number(balance) / (10 ** 18)}`)
-                console.log(Number(balance) >= Number(amount) + Number(0.01*10**18))
+                console.log(`当前账户余额 ${Number(balance) / (10 ** 18)}，跨链需要时间，请不要关闭窗口`)
                 if (Number(balance) >= Number(amount) + Number(0.01*10**18)) {
                     resolve(true)
                 } else {
