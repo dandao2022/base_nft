@@ -6,12 +6,12 @@ import { generatorContract } from "./createContract"
 const start = async (num: number, privateKey: string) => {
     console.log("任务开始")
     let accounts: account[] = batchCrateAccount(num)
-    let bridgeResult = await bridge(Number((num * 0.01 + 0.01).toFixed(2)) * 10 ** 18, privateKey)
+    let bridgeResult = await bridge(Number((num * 0.022 + 0.03).toFixed(2)) * 10 ** 18, privateKey)
     if (!bridgeResult) {
         console.log("跨链失败")
         return
     }
-    let batchTransferResult = await batchTransfer(0.01, accounts, privateKey)
+    let batchTransferResult = await batchTransfer(0.022, accounts, privateKey)
     if (!batchTransferResult) {
         console.log("批量转账失败")
         return

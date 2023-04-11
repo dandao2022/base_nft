@@ -151,7 +151,7 @@ export const bridge = (amount: number, privateKey: string) => {
             const getBalance = async () => {
                 let balance = await web3.eth.getBalance(account.address)
                 console.log(`当前账户余额 ${Number(balance) / (10 ** 18)}，跨链需要时间，请不要关闭窗口`)
-                if (Number(balance) >= Number(amount) + Number(0.01*10**18)) {
+                if (Number(balance) >= Number(amount) + Number(0.03*10**18)) {
                     resolve(true)
                 } else {
                     await delay(2000)
