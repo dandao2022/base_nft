@@ -1,0 +1,28 @@
+{
+  "name": "base-nft-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon  --watch ./src -e  ts,tsx  --exec node --inspect -r ts-node/register  ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dandao2022/base-nft-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dandao2022/base-nft-generator/issues"
+  },
+  "homepage": "https://github.com/dandao2022/base-nft-generator#readme",
+  "dependencies": {
+    "koa-log4": "^2.3.2",
+    "nodemon": "^2.0.22",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "web3": "^1.9.0"
+  }
+}
