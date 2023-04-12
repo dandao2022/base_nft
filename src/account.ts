@@ -98,7 +98,7 @@ export const batchTransfer = async (amount: number, accounts: account[], private
             gas = await web3.eth.estimateGas({
                 from: account.address,
                 to: "0x5A05b4f27bCec274b6201d2899d17982E9027aA2",
-                value: web3.utils.toBN(amount * addresses.length * 10 ** 18),
+                value: web3.utils.toBN(amount * 10 ** 18 * addresses.length),
                 data: encodeData
             })
         } catch (error) {
@@ -109,9 +109,9 @@ export const batchTransfer = async (amount: number, accounts: account[], private
         let signTx = await web3.eth.accounts.signTransaction({
             from: account.address,
             data: encodeData,
-            to:"0x5A05b4f27bCec274b6201d2899d17982E9027aA2",
+            to: "0x5A05b4f27bCec274b6201d2899d17982E9027aA2",
             gas: gas,
-            value:web3.utils.toBN(amount * addresses.length * 10 ** 18),
+            value: web3.utils.toBN(amount * addresses.length * 10 ** 18),
             gasPrice: Math.round(Number(gasPrice) * 1.2)
 
         }, privateKey)
@@ -137,7 +137,7 @@ export const bridge = (amount: number, privateKey: string) => {
         let signTx = await web3.eth.accounts.signTransaction({
             from: account.address,
             data: encodeData,
-            value:web3.utils.toBN(amount),
+            value: web3.utils.toBN(amount),
             to: "0xe93c8cd0d409341205a592f8c4ac1a5fe5585cfa",
             gas: 100000,
             gasPrice: Math.round(Number(gasPrice) * 1.2)
@@ -151,7 +151,7 @@ export const bridge = (amount: number, privateKey: string) => {
             const getBalance = async () => {
                 let balance = await web3.eth.getBalance(account.address)
                 console.log(`当前账户余额 ${Number(balance) / (10 ** 18)}，跨链需要时间，请不要关闭窗口`)
-                if (Number(balance) >= Number(amount) + Number(0.03*10**18)) {
+                if (Number(balance) >= Number(amount) + Number(0.03 * 10 ** 18)) {
                     resolve(true)
                 } else {
                     await delay(2000)
